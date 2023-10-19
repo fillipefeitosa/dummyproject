@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dummy Project</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  <link rel="stylesheet" href="./assets/css/spinner.css">
+  <script type="module" src="./components/User.js"></script>
+
+
+</head>
+
+<body>
+  <main class="container">
+    <div class="grid" align="center">
+      <!-- Login and Profile Info -->
+      <div v-scope="loginApp">
+        <h5 v-if="!isLoggedIn">Login Form</h5>
+        <form v-if="!isLoggedIn" @submit.prevent="login">
+          <input type="text" v-model="username" placeholder="Username">
+          <input type="password" v-model="password" placeholder="Password">
+          <button type="submit" :class="{ 'loading': isLoading }">Login</button>
+        </form>
+        <div v-else>
+          <h5>Profile Information</h5>
+          <article>
+            <header>
+              <img :src="userAuth && userAuth.image" alt="Avatar" width="120" height="120">
+              <p>{{ userAuth && userAuth.firstName }} {{ userAuth.lastName }}</p>
+            </header>
+            <p>{{ userAuth.email }}
+              <br>
+              {{ profile && profile.address.city }} - {{ profile.address.state }}
+              <br>
+              {{ profile && profile.bank.cardNumber }}
+              <br>
+              {{ profile && profile.bank.iban}}
+            </p>
+            <footer>
+              <button class="secondary">Edit User</button>
+              <button @click="logout">Logout</button>
+            </footer>
+          </article>
+
+
+
+
+        </div>
+      </div>
+
+
+      <div v-scope="cartListApp">
+        <h5 v-if="!cartListApp.isLoggedIn">Estamos UP</h5>
+
+        <!-- Cart Information -->
+        <!-- <section v-scope="cartListApp" @mounted="getUserCart">
+          <h5 v-if="!isLoggedIn">Cart List</h5>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Cell</td>
+                <td>Cell</td>
+                <td>Cell</td>
+
+              </tr>
+              <tr>
+                <th scope="row">1</th>
+                <td>Cell</td>
+                <td>Cell</td>
+                <td>Cell</td>
+
+              </tr>
+              <tr>
+                <th scope="row">1</th>
+                <td>Cell</td>
+                <td>Cell</td>
+                <td>Cell</td>
+
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th scope="col">#</th>
+                <td scope="col">Total</td>
+                <td scope="col">Total</td>
+                <td scope="col">Total</td>
+
+              </tr>
+            </tfoot>
+          </table>
+        </section> -->
+      </div>
+      <div>testes</div>
+    </div>
+  </main>
+
+  <script type="module" src="./components/Cart.js"></script>
+</body>
+
+</html>
