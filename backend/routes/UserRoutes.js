@@ -3,6 +3,7 @@ import {
   createUser,
   findOneUser,
   findAllUsers,
+  updateUser,
 } from "../controllers/UserController.js";
 
 // Define the routes for the user API
@@ -14,5 +15,8 @@ UserRoutes.post("/create", createUser);
 // Read users, all and one
 UserRoutes.get("/", findAllUsers);
 UserRoutes.get("/:id", findOneUser);
+
+// Update a user
+UserRoutes.patch("/:id", updateUser);
 
 export default UserRoutes;

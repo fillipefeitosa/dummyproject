@@ -55,3 +55,36 @@ export const findOneUser = async (req, res) => {
     });
   }
 };
+
+// If we want to replace the whole resource, we should use PUT. If we want to modify only some aspects of the resource, we should use PATCH
+
+// UPDATE operation
+export const updateUser = async (req, res) => {
+  if (!req.body) {
+    return res.status(400).send({
+      message: "User content can not be empty",
+    });
+  }
+  try {
+    const id = req.params.id;
+    // findByIdAndUpdate returns null if no document is found
+    const data = await User.findByIdAndUpdate(id, req.body, {
+      useFindAndModify: false,
+      new: true,
+    });
+
+    // therefore, we check if data is null
+    if (!data) {
+      return res.status(404).send({
+        message: `Cannot update User with id=${id}. Maybe User was not found!`,
+      });
+    } else {
+      res.send({ message: "User updated with sucess!", data: data });
+    }
+  } catch (error) {
+    // if there is any error, we send it to the client
+    res.status(500).send({
+      message: "Error updating User with id=" + req.params.id,
+    });
+  }
+};
