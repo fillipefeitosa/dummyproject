@@ -4,6 +4,7 @@ import {
   findOneUser,
   findAllUsers,
   updateUser,
+  deleteUser,
 } from "../controllers/UserController.js";
 
 // Define the routes for the user API
@@ -18,5 +19,8 @@ UserRoutes.get("/:id", findOneUser);
 
 // Update a user
 UserRoutes.patch("/:id", updateUser);
+
+// Delete a user
+UserRoutes.delete("/:id", deleteUser);
 
 export default UserRoutes;
