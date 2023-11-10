@@ -69,7 +69,7 @@ export const updateUser = async (req, res) => {
     const id = req.params.id;
     // findByIdAndUpdate returns null if no document is found
     const data = await User.findByIdAndUpdate(id, req.body, {
-      useFindAndModify: false,
+      // return the modified document rather than the original.
       new: true,
     });
 
