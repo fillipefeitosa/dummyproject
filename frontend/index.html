@@ -6,8 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dummy Project</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  <!-- <script src="https://unpkg.com/mitt/dist/mitt.umd.js"></script> -->
   <link rel="stylesheet" href="./assets/css/spinner.css">
   <script type="module" src="./components/User.js"></script>
+  <!-- <script type="module" src="./components/Cart.js"></script> -->
 
 
 </head>
@@ -32,7 +34,7 @@
             </header>
             <p>{{ userAuth.email }}
               <br>
-              {{ profile && profile.address.city }} - {{ profile.address.state }}
+              {{ profile && profile.address.city }} - {{ profile && profile.address.state }}
               <br>
               {{ profile && profile.bank.cardNumber }}
               <br>
@@ -51,8 +53,9 @@
       </div>
 
 
-      <div v-scope="cartListApp">
-        <h5 v-if="!cartListApp.isLoggedIn">Estamos UP</h5>
+      <div>
+
+        <h5>Estamos UP</h5>
 
         <!-- Cart Information -->
         <!-- <section v-scope="cartListApp" @mounted="getUserCart">
@@ -105,7 +108,6 @@
     </div>
   </main>
 
-  <script type="module" src="./components/Cart.js"></script>
 </body>
 
 </html>

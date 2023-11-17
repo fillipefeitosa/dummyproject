@@ -5,6 +5,8 @@ import mongoose from "mongoose";
 import myName from "./models/Name.js";
 import { dbConfig } from "./config/database.config.js";
 import UserRoutes from "./routes/UserRoutes.js";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 const port = 3000;
@@ -12,6 +14,9 @@ const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/user", UserRoutes);
+// serve fronted files
+app.use(express.static("frontend"));
+
 // Mongoose Configuration
 mongoose.Promise = global.Promise;
 
@@ -31,8 +36,9 @@ async function connectToDatabase() {
 connectToDatabase();
 
 // incoming request -> sendind response
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 
 app.get("/getmyname", (req, res) => {
