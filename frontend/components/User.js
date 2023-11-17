@@ -31,10 +31,8 @@ const loginApp = reactive({
       if (data && data.token) {
         localStorage.setItem("isLoggedIn", true); // save to local storage
         this.userAuth = data;
-        console.log("userAuth:" + this.userAuth.firstName);
         this.isLoggedIn = true; // update reactive state
         this.isLoading = false;
-        await this.getUserData(this.userAuth.id);
       } else {
         throw new Error("Invalid Credentials:" + response.status);
       }
@@ -74,3 +72,4 @@ const loginApp = reactive({
 });
 
 createApp({ loginApp }).mount();
+this.getUserData();

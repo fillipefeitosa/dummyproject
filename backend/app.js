@@ -15,7 +15,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/user", UserRoutes);
 // serve fronted files
-app.use(express.static("frontend"));
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
+app.use(express.static(path.join(__dirname, "../frontend")));
 
 // Mongoose Configuration
 mongoose.Promise = global.Promise;
@@ -36,7 +37,7 @@ async function connectToDatabase() {
 connectToDatabase();
 
 // incoming request -> sendind response
-const __dirname = fileURLToPath(new URL(".", import.meta.url));
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
